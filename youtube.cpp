@@ -203,6 +203,41 @@ void looping()
   {
     std::cout << i << std::endl;
   }
+
+  std::string password = "hellotacos123";
+  std::string guess;
+  do
+  {
+    std::cout << "Guess the password: ";
+    std::cin >> guess;
+  } while (guess != password);
+}
+
+void break_and_continue()
+{
+  std::string sentence = "Hello my name is Taylor";
+  for (int i = 0; i < sentence.length(); i++)
+  {
+    if (sentence[i] == 'o')
+    {
+      continue;
+    }
+    std::cout << sentence[i] << std::endl;
+    if (sentence[i] == 'T')
+    {
+      break;
+    }
+  }
+}
+
+void ternary_operator()
+{
+  int answer = 11;
+  std::cout << "Guess the number: ";
+  int guess;
+  std::cin >> guess;
+  int points = guess == answer ? 10 : 0;
+  std::cout << "Your Points: " << points << std::endl;
 }
 
 int main()
