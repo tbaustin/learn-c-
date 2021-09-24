@@ -2,6 +2,8 @@
 #include <climits>
 #include <cmath>
 #include <string>
+#include <cstdlib>
+#include <ctime>
 
 using std::cin;
 using std::cout;
@@ -240,6 +242,53 @@ void ternary_operator()
   std::cout << "Your Points: " << points << std::endl;
 }
 
+void play_game()
+{
+  int random = rand() % 11;
+  int guess;
+  std::cout << random << std::endl;
+  while (guess != random)
+  {
+    std::cout << "Guess a number: ";
+    std::cin >> guess;
+    if (guess == random)
+    {
+      std::cout << "You win!\n";
+    }
+    else if (guess < random)
+    {
+      std::cout << "To low\n";
+    }
+    else
+    {
+      std::cout << "To high\n";
+    }
+  }
+}
+
 int main()
 {
+  // http://www.cplusplus.com/reference/cstdlib/srand/
+  // "seeds" the rand() function so that each succession will be different
+  // so if execution one returns 23, then execution two will never return 23 and so on
+  // this works as long as the number is different each time srand() is called
+  // time(NULL) seems to just get the current time which will obviously be different
+  // every time it is called.
+  srand(time(NULL));
+  int choice;
+
+  do
+  {
+    std::cout << "0. Quit\n1. Play Game\n";
+    std::cin >> choice;
+    switch (choice)
+    {
+    case 0:
+      std::cout << "Thanks for nothing\n";
+      return 0;
+    case 1:
+      play_game();
+      break;
+    }
+  } while (choice != 0);
 }
