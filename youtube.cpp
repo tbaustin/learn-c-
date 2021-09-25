@@ -1,5 +1,6 @@
 #include <iostream>
 #include <climits>
+#include <limits>
 #include <cmath>
 #include <string>
 #include <cstdlib>
@@ -242,8 +243,25 @@ void ternary_operator()
   std::cout << "Your Points: " << points << std::endl;
 }
 
+void print_array(int array[], int size)
+{
+  for (int i = 0; i < size; i++)
+  {
+    std::cout << array[i];
+    if (i == size - 1)
+    {
+      break;
+    }
+    std::cout << ", ";
+  }
+  std::cout << std::endl;
+}
+
 void play_game()
 {
+  int guesses[250];
+  int guess_count = 0;
+
   int random = rand() % 11;
   int guess;
   std::cout << random << std::endl;
@@ -251,6 +269,10 @@ void play_game()
   {
     std::cout << "Guess a number: ";
     std::cin >> guess;
+
+    // grabs current value of guess_count and uses it as an index
+    // then increases it by 1
+    guesses[guess_count++] = guess;
     if (guess == random)
     {
       std::cout << "You win!\n";
@@ -264,9 +286,12 @@ void play_game()
       std::cout << "To high\n";
     }
   }
+
+  std::cout << "Your guesses: ";
+  print_array(guesses, guess_count);
 }
 
-int main()
+void init_game()
 {
   // http://www.cplusplus.com/reference/cstdlib/srand/
   // "seeds" the rand() function so that each succession will be different
@@ -285,10 +310,39 @@ int main()
     {
     case 0:
       std::cout << "Thanks for nothing\n";
-      return 0;
+      break;
     case 1:
       play_game();
       break;
     }
   } while (choice != 0);
+}
+
+void filling_array_with_user_input()
+{
+  const int SIZE = 10;
+  int guesses[SIZE];
+  int count;
+  long maxStreamSize = std::numeric_limits<std::streamsize>::max();
+
+  for (int i = 0; i < SIZE; i++)
+  {
+    if (std::cin >> guesses[i])
+    {
+      count++;
+    }
+    else
+    {
+      break;
+    }
+  }
+
+  print_array(guesses, count);
+  std::cin.clear();
+  std::cin.ignore(maxStreamSize, '\n');
+}
+
+int main()
+{
+  init_game();
 }
