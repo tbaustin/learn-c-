@@ -1,10 +1,13 @@
 #include <iostream>
+#include <fstream>
 #include <climits>
 #include <limits>
 #include <cmath>
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
+#include <array>
 
 using std::cin;
 using std::cout;
@@ -243,12 +246,12 @@ void ternary_operator()
   std::cout << "Your Points: " << points << std::endl;
 }
 
-void print_array(int array[], int size)
+void print_vector(std::vector<int> data)
 {
-  for (int i = 0; i < size; i++)
+  for (int i = 0; i < data.size(); i++)
   {
-    std::cout << array[i];
-    if (i == size - 1)
+    std::cout << data[i];
+    if (i == data.size() - 1)
     {
       break;
     }
@@ -259,8 +262,7 @@ void print_array(int array[], int size)
 
 void play_game()
 {
-  int guesses[250];
-  int guess_count = 0;
+  std::vector<int> guesses;
 
   int random = rand() % 11;
   int guess;
@@ -270,9 +272,7 @@ void play_game()
     std::cout << "Guess a number: ";
     std::cin >> guess;
 
-    // grabs current value of guess_count and uses it as an index
-    // then increases it by 1
-    guesses[guess_count++] = guess;
+    guesses.push_back(guess);
     if (guess == random)
     {
       std::cout << "You win!\n";
@@ -288,7 +288,7 @@ void play_game()
   }
 
   std::cout << "Your guesses: ";
-  print_array(guesses, guess_count);
+  print_vector(guesses);
 }
 
 void init_game()
@@ -318,6 +318,11 @@ void init_game()
   } while (choice != 0);
 }
 
+void print_array(int array[], int count)
+{
+  std::cout << array[count] << "\n";
+}
+
 void filling_array_with_user_input()
 {
   const int SIZE = 10;
@@ -342,7 +347,38 @@ void filling_array_with_user_input()
   std::cin.ignore(maxStreamSize, '\n');
 }
 
+void print_vector_example(std::vector<int> &data) // adding & passes by reference (essentially the same array)
+{
+  for (int i = 0; i < data.size(); i++)
+  {
+    std::cout << data[i] << "\t";
+  }
+  std::cout << "\n";
+}
+
+void print_template_array()
+{
+  std::array<int, 5> data = {1, 2, 3};
+
+  for (int i = 0; i < data.size(); i++)
+  {
+    std::cout << data[i] << "\t";
+  }
+  std::cout << "\n";
+}
+
+void range_based_for_loop()
+{
+  int data[] = {1, 2, 3, 4, 5, 6};
+
+  for (int datum : data)
+  {
+    std::cout << datum << "\t";
+  }
+
+  std::cout << "\n";
+}
+
 int main()
 {
-  init_game();
 }
