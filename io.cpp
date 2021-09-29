@@ -29,7 +29,7 @@ void output_file()
   file.close();
 }
 
-int main()
+void input_file()
 {
   std::ifstream file("tacos.txt");
 
@@ -45,4 +45,11 @@ int main()
   {
     std::cout << name << std::endl;
   }
+
+  char temp = file.get();
+  std::cout << temp << "\n";
+}
+
+int main()
+{
 }
