@@ -266,7 +266,7 @@ void play_game()
 
   int random = rand() % 11;
   int guess;
-  std::cout << random << std::endl;
+  std::cout << "Random Num: " << random << std::endl;
   while (guess != random)
   {
     std::cout << "Guess a number: ";
@@ -286,6 +286,30 @@ void play_game()
       std::cout << "To high\n";
     }
   }
+
+  std::ifstream input("best_score.txt");
+  if (!input.is_open())
+  {
+    std::cout << "No file exist creating a new one!\n";
+    std::ofstream("best_score.txt");
+    return;
+  }
+
+  int best_score;
+  input >> best_score;
+
+  std::ofstream output("best_score.txt");
+
+  if (guesses.size() < best_score)
+  {
+    output << guesses.size();
+  }
+  else
+  {
+    output << best_score;
+  }
+
+  // output.close();
 
   std::cout << "Your guesses: ";
   print_vector(guesses);
@@ -381,4 +405,5 @@ void range_based_for_loop()
 
 int main()
 {
+  init_game();
 }
