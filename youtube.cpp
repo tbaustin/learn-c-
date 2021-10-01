@@ -12,6 +12,33 @@
 using std::cin;
 using std::cout;
 
+void save_score(int guess_count)
+{
+  std::ifstream input("best_score.txt");
+  if (!input.is_open())
+  {
+    std::cout << "No file exist creating a new one!\n";
+    std::ofstream("best_score.txt");
+    return;
+  }
+
+  int best_score;
+  input >> best_score;
+
+  std::ofstream output("best_score.txt");
+
+  if (guess_count < best_score)
+  {
+    output << guess_count;
+  }
+  else
+  {
+    output << best_score;
+  }
+
+  output.close();
+}
+
 double power(double base, int exponent)
 {
   double result = 1;
@@ -287,29 +314,7 @@ void play_game()
     }
   }
 
-  std::ifstream input("best_score.txt");
-  if (!input.is_open())
-  {
-    std::cout << "No file exist creating a new one!\n";
-    std::ofstream("best_score.txt");
-    return;
-  }
-
-  int best_score;
-  input >> best_score;
-
-  std::ofstream output("best_score.txt");
-
-  if (guesses.size() < best_score)
-  {
-    output << guesses.size();
-  }
-  else
-  {
-    output << best_score;
-  }
-
-  // output.close();
+  save_score(guesses.size());
 
   std::cout << "Your guesses: ";
   print_vector(guesses);
