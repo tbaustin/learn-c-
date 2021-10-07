@@ -13,6 +13,6 @@ int main()
 
   // std::cout << area(rectangle) << std::endl;
 
-  std::cout << pow(3, 3) << std::endl;
-  std::cout << pow(3) << std::endl;
+  std::cout << utilz::pow(3, 3) << std::endl;
+  std::cout << utilz::pow(3) << std::endl;
 }
