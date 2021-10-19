@@ -6,20 +6,27 @@ class User
 private:
   // vars
   std::string status = "Gold";
+  static int user_count;
 
 public:
   // vars
+  static int get_user_count()
+  {
+    return user_count;
+  }
   std::string first_name;
   std::string last_name;
 
   // contructors
   User()
   {
-    std::cout << "Constructor\n";
+    user_count++;
+    // std::cout << "Constructor\n";
   }
 
   User(std::string first_name, std::string last_name, std::string status)
   {
+    user_count++;
     this->first_name = first_name;
     this->last_name = last_name;
     this->status = status;
@@ -28,7 +35,8 @@ public:
   // destructors
   ~User()
   {
-    std::cout << "Destructor\n";
+    user_count--;
+    // std::cout << "Destructor\n";
   }
 
   // methods
@@ -36,7 +44,21 @@ public:
   {
     return status;
   }
+
+  void set_status(std::string status)
+  {
+    if (status == "Gold" || status == "Silver" || status == "Bronze")
+    {
+      this->status = status;
+    }
+    else
+    {
+      this->status = "No Status";
+    }
+  }
 };
+
+int User::user_count = 0;
 
 int add_user_if_not_exists(std::vector<User> &users, User user)
 {
@@ -58,8 +80,8 @@ int add_user_if_not_exists(std::vector<User> &users, User user)
 
 int main()
 {
-  User user("Taylor", "Austin", "Silver");
-
-  std::cout << user.first_name << " " << user.last_name << std::endl;
-  std::cout << user.get_status() << std::endl;
+  User user, user1, user2, user3, user4;
+  std::cout << "User Count: " << User::get_user_count() << std::endl;
+  user.~User();
+  std::cout << "User Count: " << User::get_user_count() << std::endl;
 }
