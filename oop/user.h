@@ -24,6 +24,8 @@ public:
   // methods
   std::string get_status();
   void set_status(std::string status);
+  // virtual lets children classes override this func
+  virtual void output();
 
   // friend functions with overloading
   friend std::ostream &operator<<(std::ostream &output, User user);

@@ -36,6 +36,11 @@ std::string User::get_status()
   return status;
 }
 
+void User::output()
+{
+  std::cout << "User output \n";
+}
+
 void User::set_status(std::string status)
 {
   if (status == "Gold" || status == "Silver" || status == "Bronze")
